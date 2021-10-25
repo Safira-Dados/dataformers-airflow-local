@@ -1,0 +1,2 @@
+# Dataformers Airflow Local
+[![Deploy Python Docker Image](https://github.com/Safira-Dados/dataformers-airflow-local/actions/workflows/deploy-python-image.yaml/badge.svg?branch=master)](https://github.com/Safira-Dados/dataformers-airflow-local/actions/workflows/deploy-python-image.yaml) 
