@@ -8,8 +8,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - name: Docker Build Python Image
-      uses: actions/checkout@v2
       run: |
         cd docker/python
         docker build -t airflow-python-container:latest .
