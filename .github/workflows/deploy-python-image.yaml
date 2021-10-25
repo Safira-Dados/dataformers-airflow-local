@@ -1,0 +1,26 @@
+name: Deploy Python Docker Image
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Docker Authentication
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    
+    - name: Docker Build Python Image
+      run: |
+        cd docker/python
+        docker build -t ${{secrets.DOCKER_USER}}/airflow-python-container:dev-latest .
+    
+    - name: Docker Push Python Image
+      run: docker push ${{secrets.DOCKER_USER}}/airflow-python-container:dev-latest
