@@ -8,6 +8,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Docker Build Python Image
+      uses: actions/checkout@v2
+      run: |
+        cd docker/python
+        docker build -t airflow-python-container:latest .
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -25,8 +31,7 @@ jobs:
         ECR_REPOSITORY: airflow-python-container
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        cd docker/python/
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker tag airflow-python-container:latest $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
 
