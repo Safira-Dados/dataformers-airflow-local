@@ -19,7 +19,9 @@ on:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
     
-      build:
+    build:
+      runs-on: ubuntu-latest
+    steps:
     - name: Build, tag, and push image to Amazon ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
